@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth/auth.module';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +13,7 @@ import { LayoutModule } from './layout/layout.module';
     AppComponent
   ],
   imports: [
+    AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase),
     AppRoutingModule,
     BrowserModule,
