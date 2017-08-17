@@ -1,24 +1,30 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { MdButtonModule, MdIconModule, MdSidenavModule, MdToolbarModule } from '@angular/material';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { MdButtonModule, MdIconModule, MdToolbarModule } from '@angular/material';
+import { RouterModule } from '@angular/router';
 
-import { SidenavComponent } from './sidenav/sidenav.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { ToolbarService } from './toolbar/toolbar.service';
 
 @NgModule({
   imports: [
     CommonModule,
-    MdButtonModule,
-    MdIconModule,
-    MdSidenavModule,
     MdToolbarModule,
+    RouterModule
   ],
   declarations: [
-    SidenavComponent,
     ToolbarComponent
   ], exports: [
-    SidenavComponent,
     ToolbarComponent
   ]
 })
-export class LayoutModule { }
+export class LayoutModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: LayoutModule,
+      providers: [
+        ToolbarService
+      ]
+    };
+  }
+}

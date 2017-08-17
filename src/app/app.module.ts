@@ -15,7 +15,7 @@ import { LayoutModule } from './layout/layout.module';
     AngularFireModule.initializeApp(environment.firebase),
     AppRoutingModule,
     BrowserModule,
-    LayoutModule
+    LayoutModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
