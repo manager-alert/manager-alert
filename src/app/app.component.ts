@@ -11,6 +11,7 @@ import { User } from 'firebase';
 })
 export class AppComponent {
   private authState$: Observable<User>;
+  private swRegistrations: ServiceWorkerRegistration[];
 
   constructor(
     private angularFireAuth: AngularFireAuth,
@@ -18,6 +19,26 @@ export class AppComponent {
 
     this.initAuthentification();
     pushNotificationService.requestPermission();
+
+    if ('serviceWorker' in navigator && 'PushManager' in window) {
+      navigator.serviceWorker.getRegistrations().then(registrations => {
+        this.swRegistrations = registrations;
+        console.log(registrations);
+
+        for (const registration of this.swRegistrations) {
+          registration.pushManager.getSubscription()
+            .then(subscription => {
+              const isSubscribed = subscription !== null;
+
+              if (isSubscribed) {
+                console.log('User IS subscribed.');
+              } else {
+                console.log('User is NOT subscribed.');
+              }
+            });
+        }
+      });
+    }
   }
 
   /**

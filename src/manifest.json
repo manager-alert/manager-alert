@@ -1,0 +1,10 @@
+{
+    "name": "Guffl - der Trainer-Assistent",
+    "short_name": "Guffl",
+    "icons": [],
+    "start_url": "/index.html",
+    "theme_color": "#f1c232",
+    "background_color": "#f1c232",
+    "display": "standalone",
+    "gcm_sender_id": "103953800507"
+}
