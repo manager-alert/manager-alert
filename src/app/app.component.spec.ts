@@ -1,6 +1,7 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { async, TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
+import { PushNotificationsModule } from 'angular2-notifications';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 
@@ -20,6 +21,7 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         LayoutModule.forRoot(),
+        PushNotificationsModule,
         RouterModule.forRoot([])
       ],
       declarations: [

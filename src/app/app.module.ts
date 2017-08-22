@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { PushNotificationsModule } from 'angular2-notifications';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth/auth.module';
 
@@ -17,7 +18,8 @@ import { LayoutModule } from './layout/layout.module';
     AngularFireModule.initializeApp(environment.firebase),
     AppRoutingModule,
     BrowserModule,
-    LayoutModule.forRoot()
+    LayoutModule.forRoot(),
+    PushNotificationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
