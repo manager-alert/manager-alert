@@ -16,6 +16,7 @@ export class AppComponent {
 
     this.authState$.subscribe(state => console.log(state));
 
+    // Create user on clients without token
     this.authState$
       .filter(state => state === null)
       .do(() => angularFireAuth.auth.signInAnonymously())

@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MdButtonModule, MdIconModule, MdToolbarModule } from '@angular/material';
 
 import { ToolbarComponent } from './toolbar.component';
+import { ToolbarService } from './toolbar.service';
 
 describe('ToolbarComponent', () => {
   let component: ToolbarComponent;
@@ -14,7 +15,8 @@ describe('ToolbarComponent', () => {
         MdButtonModule,
         MdIconModule,
         MdToolbarModule
-      ]
+      ],
+      providers: [ToolbarService]
     })
       .compileComponents();
   }));
