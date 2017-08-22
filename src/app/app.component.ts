@@ -67,8 +67,8 @@ export class AppComponent {
         userVisibleOnly: true,
         applicationServerKey: applicationServerKey
       })
-        .then(function (subscription) {
-          console.log('User is subscribed.', subscription);
+        .then(subscription => {
+          console.log('User is subscribed.', subscription, JSON.stringify(subscription));
         })
         .catch(err => console.log('Failed to subscribe the user: ', err));
     }
