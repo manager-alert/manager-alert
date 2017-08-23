@@ -1,3 +1,5 @@
+import 'rxjs/add/observable/timer';
+import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/filter';
 

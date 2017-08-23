@@ -1,3 +1,4 @@
+import { PushNotificationService } from './shared/services/push-notification.service';
 import { Component } from '@angular/core';
 import { PushNotificationsService } from 'angular2-notifications';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -15,10 +16,9 @@ export class AppComponent {
 
   constructor(
     private angularFireAuth: AngularFireAuth,
-    private pushNotificationService: PushNotificationsService) {
+    private pushNotificationService: PushNotificationService) {
 
     this.initAuthentification();
-    pushNotificationService.requestPermission();
 
     if ('serviceWorker' in navigator && 'PushManager' in window) {
       navigator.serviceWorker.getRegistrations().then(registrations => {

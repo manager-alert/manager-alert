@@ -1,12 +1,12 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { async, TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
-import { PushNotificationsModule } from 'angular2-notifications';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 
 import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
+import { PushNotificationService } from './shared/services/push-notification.service';
 
 const angularFireAuthMock = {
   app: undefined,
@@ -21,14 +21,14 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         LayoutModule.forRoot(),
-        PushNotificationsModule,
         RouterModule.forRoot([])
       ],
       declarations: [
         AppComponent
       ], providers: [
         { provide: APP_BASE_HREF, useValue: '/' },
-        { provide: AngularFireAuth, useValue: angularFireAuthMock }
+        { provide: AngularFireAuth, useValue: angularFireAuthMock },
+        { provide: PushNotificationService, useValue: {} }
       ]
     }).compileComponents();
   }));
