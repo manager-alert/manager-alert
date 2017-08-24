@@ -23,7 +23,6 @@ export class AppComponent {
     if ('serviceWorker' in navigator && 'PushManager' in window) {
       navigator.serviceWorker.getRegistrations().then(registrations => {
         this.swRegistrations = registrations;
-        console.log(registrations);
 
         this.subscribeUser();
 
@@ -31,7 +30,6 @@ export class AppComponent {
           registration.pushManager.getSubscription()
             .then(subscription => {
               const isSubscribed = subscription !== null;
-
 
               if (isSubscribed) {
                 console.log('User IS subscribed.');
@@ -49,8 +47,6 @@ export class AppComponent {
    */
   private initAuthentification() {
     this.authState$ = this.angularFireAuth.authState;
-
-    this.authState$.subscribe(state => console.log(state));
 
     // Create user on clients without token
     this.authState$
