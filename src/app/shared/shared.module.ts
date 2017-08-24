@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { CHECK_PERMISSION_PERIOD } from './constants/check-permission-period';
 import { READ_SERVICE_WORKER_REGISTRATION_PERIOD } from './constants/read-service-worker-registration-period';
@@ -7,9 +8,9 @@ import { PushNotificationService } from './services/push-notification.service';
 
 @NgModule({
   imports: [
-    CommonModule
-  ],
-  declarations: []
+    CommonModule,
+    RouterModule
+  ]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {

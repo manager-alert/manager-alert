@@ -8,6 +8,9 @@ const routes: Routes = [
     }, {
         path: 'not-found',
         loadChildren: './not-found-page/not-found-page.module#NotFoundPageModule'
+    }, {
+        path: 'not-supported',
+        loadChildren: './not-supported-page/not-supported-page.module#NotSupportedPageModule'
     },
     { path: '**', redirectTo: 'not-found' }
 ];

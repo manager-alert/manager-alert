@@ -1,11 +1,12 @@
 import { Inject } from '@angular/core';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { messaging } from 'firebase';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 
 import { CHECK_PERMISSION_PERIOD } from '../constants/check-permission-period';
-import { READ_SERVICE_WORKER_REGISTRATION_PERIOD } from "../constants/read-service-worker-registration-period";
+import { READ_SERVICE_WORKER_REGISTRATION_PERIOD } from '../constants/read-service-worker-registration-period';
 
 @Injectable()
 export class PushNotificationService {
@@ -18,12 +19,12 @@ export class PushNotificationService {
   public readonly serviceWorkerRegistration$ = this.lastServiceWorkerRegistration$.distinctUntilChanged();
 
   constructor(
+    private router: Router,
     @Inject(CHECK_PERMISSION_PERIOD) checkPermissionPeriod: number,
     @Inject(READ_SERVICE_WORKER_REGISTRATION_PERIOD) checkServiceWorkerRegistrationPeriod: number) {
+
     this.startCheckingPermissionFrequently(checkPermissionPeriod);
     this.startCheckingServiceWorkerRegistrationFrequently(checkServiceWorkerRegistrationPeriod);
-
-    this.serviceWorkerRegistration$.do(console.log).subscribe();
   }
 
   /**
@@ -37,7 +38,7 @@ export class PushNotificationService {
         .then((registrations: ServiceWorkerRegistration[]) => this.lastServiceWorkerRegistration$.next(registrations[0]))
         .catch(err => this.lastServiceWorkerRegistration$.next(undefined));
     } else {
-      this.lastServiceWorkerRegistration$.next(undefined);
+      this.router.navigate(['/not-supported']);
     }
   }
 
