@@ -23,7 +23,7 @@ export class SharedModule {
         { provide: READ_SERVICE_WORKER_REGISTRATION_PERIOD, useValue: 30000 },
         {
           provide: PUSH_NOTIFICATION_PUBLIC_KEY,
-          useValue: 'BOgxMhM2SDnBKhvWq9D5oYnzJTiHGQDk1zqkqCmyoqIjVpcYadi9_5s9S8Uoi-2Ry5_8AIF8YC2BQpTpBtMOQH0'
+          useValue: 'BJIzrqBhVEYKWoTmEyjAHG5D2nW6Fl2FrB_9h-ueopO528-jBYRfzMIS2t1rJsAv01P1wOtt2A5XegnaChNJ5v8'
         }
       ]
     };
