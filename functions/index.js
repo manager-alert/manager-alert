@@ -49,6 +49,22 @@ exports.subscribeToPlayer = functions.database
         }).then(() => console.log('Successfully subscribed'));
     });
 
+exports.unsubscribeFromPlayer = functions.database
+    .ref('users/{userId}/players/{playerId}')
+    .onDelete(event => {
+        var playerId = event.data.key;
+
+        var user = event.data.ref.parent.parent;
+        return user.child('push-subscriptions').once('value').then(snap => {
+            return snap.forEach(subscription => {
+                var token = subscription.key;
+
+                return admin.messaging().unsubscribeFromTopic(token, playerId)
+                    .then(() => console.log('Unsubscribed from player ' + playerId));
+            });
+        }).then(() => console.log('Successfully unsubscribed'));
+    });
+
 function getPlayer(id) {
     return admin.database()
         .ref('players/' + id)
