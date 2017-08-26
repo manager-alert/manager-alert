@@ -39,9 +39,7 @@ export class AppComponent {
    * Subscribes for push notifications
    */
   private subscribeForPushNotifications() {
-    this.authState$
-      .filter(state => !!state) // only registered users
-      .switchMap(state => this.pushNotificationService.subscribeForPushNotifications())
+    this.pushNotificationService.subscribeForPushNotifications()
       .subscribe();
   }
 }

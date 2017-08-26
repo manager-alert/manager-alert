@@ -2,6 +2,7 @@
 
 # Firebase
 /functions/node_modules
+/functions/private-key.json
 
 # compiled output
 /dist

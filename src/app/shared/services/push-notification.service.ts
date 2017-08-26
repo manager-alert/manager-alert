@@ -6,8 +6,8 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 
 import { CHECK_PERMISSION_PERIOD } from '../constants/check-permission-period';
-import { PUSH_NOTIFICATION_PUBLIC_KEY } from '../constants/push-notification-public-key';
 import { READ_SERVICE_WORKER_REGISTRATION_PERIOD } from '../constants/read-service-worker-registration-period';
+import { UserService } from './user.service';
 
 @Injectable()
 export class PushNotificationService {
@@ -19,12 +19,12 @@ export class PushNotificationService {
   public readonly hasPermission$ = this.lastReadPermission$.distinctUntilChanged();
   /** Registered service worker */
   public readonly serviceWorkerRegistration$ = this.lastServiceWorkerRegistration$.distinctUntilChanged();
-  /** Subscribed push service */
-  public readonly pushSubscription$ = new BehaviorSubject<PushSubscription>(undefined);
+  /** Subscribed push token */
+  public readonly pushToken$ = new BehaviorSubject<string>(undefined);
 
   constructor(
+    private userService: UserService,
     private router: Router,
-    @Inject(PUSH_NOTIFICATION_PUBLIC_KEY) private publicKey: string,
     @Inject(CHECK_PERMISSION_PERIOD) checkPermissionPeriod: number,
     @Inject(READ_SERVICE_WORKER_REGISTRATION_PERIOD) checkServiceWorkerRegistrationPeriod: number) {
 
@@ -83,31 +83,11 @@ export class PushNotificationService {
    * Subscribes to push notifications
    */
   subscribeForPushNotifications() {
-    const decryptedPublicKey = this.urlB64ToUint8Array(this.publicKey);
-    const pushOptions = {
-      userVisibleOnly: true,
-      applicationServerKey: decryptedPublicKey
-    };
-
     return this.serviceWorkerRegistration$
       .filter(registration => !!registration)
-      .map(registration => registration.pushManager)
-      .switchMap(pushManager => pushManager.subscribe(pushOptions))
-      .do(subscription => this.pushSubscription$.next(subscription));
-  }
-
-  private urlB64ToUint8Array(base64String: string) {
-    const padding = '='.repeat((4 - base64String.length % 4) % 4);
-    const base64 = (base64String + padding)
-      .replace(/\-/g, '+')
-      .replace(/_/g, '/');
-
-    const rawData = window.atob(base64);
-    const outputArray = new Uint8Array(rawData.length);
-
-    for (let i = 0; i < rawData.length; ++i) {
-      outputArray[i] = rawData.charCodeAt(i);
-    }
-    return outputArray;
+      .do(registration => this.messaging.useServiceWorker(registration))
+      .switchMap(() => this.messaging.getToken())
+      .do(token => this.pushToken$.next(token))
+      .switchMap(token => this.userService.addPushSubscription(token));
   }
 }

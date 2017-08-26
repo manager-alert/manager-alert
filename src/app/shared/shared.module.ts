@@ -1,14 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AngularFireAuthModule } from 'angularfire2/auth/auth.module';
+import { AngularFireDatabaseModule } from 'angularfire2/database/database.module';
 
 import { CHECK_PERMISSION_PERIOD } from './constants/check-permission-period';
-import { PUSH_NOTIFICATION_PUBLIC_KEY } from './constants/push-notification-public-key';
 import { READ_SERVICE_WORKER_REGISTRATION_PERIOD } from './constants/read-service-worker-registration-period';
 import { PushNotificationService } from './services/push-notification.service';
+import { UserService } from './services/user.service';
 
 @NgModule({
   imports: [
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
     CommonModule,
     RouterModule
   ]
@@ -19,12 +23,9 @@ export class SharedModule {
       ngModule: SharedModule,
       providers: [
         PushNotificationService,
+        UserService,
         { provide: CHECK_PERMISSION_PERIOD, useValue: 10000 },
-        { provide: READ_SERVICE_WORKER_REGISTRATION_PERIOD, useValue: 30000 },
-        {
-          provide: PUSH_NOTIFICATION_PUBLIC_KEY,
-          useValue: 'BJIzrqBhVEYKWoTmEyjAHG5D2nW6Fl2FrB_9h-ueopO528-jBYRfzMIS2t1rJsAv01P1wOtt2A5XegnaChNJ5v8'
-        }
+        { provide: READ_SERVICE_WORKER_REGISTRATION_PERIOD, useValue: 30000 }
       ]
     };
   }
