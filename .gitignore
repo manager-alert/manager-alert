@@ -4,6 +4,10 @@
 /functions/node_modules
 /functions/private-key.json
 
+# Jobs
+/jobs/node_modules
+/jobs/private-key.json
+
 # compiled output
 /dist
 /tmp

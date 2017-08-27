@@ -1,0 +1,12 @@
+{
+  "name": "jobs",
+  "description": "Jobs for crawling data",
+  "dependencies": {
+    "firebase-admin": "~4.2.1",
+    "firebase-functions": "^0.5.7",
+    "jsdom": "^11.2.0",
+    "request": "^2.81.0",
+    "request-promise-native": "^1.0.4"
+  },
+  "private": true
+}
