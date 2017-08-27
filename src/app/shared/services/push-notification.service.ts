@@ -86,8 +86,14 @@ export class PushNotificationService {
     return this.serviceWorkerRegistration$
       .filter(registration => !!registration)
       .do(registration => this.messaging.useServiceWorker(registration))
+      .do(registration => registration.addEventListener('notificationclick', this.onNotificationClick))
       .switchMap(() => this.messaging.getToken())
       .do(token => this.pushToken$.next(token))
       .switchMap(token => this.userService.addPushSubscription(token));
+  }
+
+  private onNotificationClick(event) {
+    window.open('https://google.com');
+    event.notification.close();
   }
 }

@@ -21,6 +21,8 @@ exports.sendPushNotification = functions.database
                     var payload = {
                         notification: {
                             body: news.title,
+                            clickAction: news.link,
+                            click_action: news.link,
                             icon: player.image,
                             tag: player.name,
                             title: player.name
