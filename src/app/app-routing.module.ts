@@ -6,6 +6,9 @@ const routes: Routes = [
         path: '',
         loadChildren: './landing-page/landing-page.module#LandingPageModule'
     }, {
+        path: 'select-player',
+        loadChildren: './select-player-page/select-player-page.module#SelectPlayerPageModule'
+    }, {
         path: 'not-found',
         loadChildren: './not-found-page/not-found-page.module#NotFoundPageModule'
     }, {
