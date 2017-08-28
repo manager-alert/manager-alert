@@ -1,10 +1,19 @@
 {
-    "name": "Guffl - der Trainer-Assistent",
-    "short_name": "Guffl",
-    "icons": [],
-    "start_url": "/index.html",
-    "theme_color": "#f1c232",
-    "background_color": "#f1c232",
+    "name": "guffl.de - der Trainer-Assistent",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#faf28e",
+    "background_color": "#faf28e",
     "display": "standalone",
     "gcm_sender_id": "103953800507"
 }
